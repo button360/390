@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Calculator</title>
+    <title>Dark Mode Calculator</title>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #e0e0e0;
+            background-color: #121212;
             margin: 0;
             font-family: 'Arial', sans-serif;
+            color: #ffffff;
         }
         .calculator {
-            background: #fff;
+            background: #1e1e1e;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             padding: 20px;
             width: 320px;
             text-align: center;
@@ -30,8 +31,10 @@
             padding: 10px;
             font-size: 1.5em;
             text-align: right;
-            border: 2px solid #ccc;
+            border: none;
             border-radius: 6px;
+            background-color: #333333;
+            color: #ffffff;
         }
         .calculator button {
             width: 70px;
@@ -40,19 +43,31 @@
             font-size: 1.2em;
             border: none;
             border-radius: 8px;
-            background-color: #4CAF50;
-            color: white;
+            background-color: #333333;
+            color: #ffffff;
             cursor: pointer;
             transition: background-color 0.3s;
         }
         .calculator button:active {
-            background-color: #45a049;
+            background-color: #555555;
         }
         .operator {
-            background-color: #FF9500;
+            background-color: #ff9500;
         }
         .operator:active {
             background-color: #e08300;
+        }
+        .equals {
+            background-color: #4caf50;
+        }
+        .equals:active {
+            background-color: #45a049;
+        }
+        .clear {
+            background-color: #ff3b30;
+        }
+        .clear:active {
+            background-color: #e02920;
         }
         .error {
             position: fixed;
@@ -60,7 +75,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(18, 18, 18, 0.95);
             color: red;
             font-size: 0.8em;
             overflow: hidden;
@@ -73,6 +88,15 @@
             margin: 0;
             white-space: nowrap;
             position: absolute;
+            animation: scrollDown 3s linear infinite;
+        }
+        @keyframes scrollDown {
+            0% {
+                top: -100%;
+            }
+            100% {
+                top: 100%;
+            }
         }
     </style>
 </head>
@@ -80,28 +104,31 @@
     <div class="calculator">
         <input type="text" id="display" disabled>
         <div>
-            <button onclick="appendToDisplay('1')">1</button>
-            <button onclick="appendToDisplay('2')">2</button>
-            <button onclick="appendToDisplay('3')">3</button>
-            <button class="operator" onclick="appendToDisplay('+')">+</button>
-        </div>
-        <div>
-            <button onclick="appendToDisplay('4')">4</button>
-            <button onclick="appendToDisplay('5')">5</button>
-            <button onclick="appendToDisplay('6')">6</button>
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="operator" onclick="appendToDisplay('/')">/</button>
+            <button class="operator" onclick="appendToDisplay('*')">x</button>
             <button class="operator" onclick="appendToDisplay('-')">-</button>
         </div>
         <div>
             <button onclick="appendToDisplay('7')">7</button>
             <button onclick="appendToDisplay('8')">8</button>
             <button onclick="appendToDisplay('9')">9</button>
-            <button class="operator" onclick="appendToDisplay('*')">x</button>
+            <button class="operator" onclick="appendToDisplay('+')">+</button>
         </div>
         <div>
-            <button onclick="appendToDisplay('0')">0</button>
-            <button class="operator" onclick="appendToDisplay('/')">/</button>
-            <button onclick="calculateResult()">=</button>
-            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button class="equals" onclick="calculateResult()">=</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('0')" style="width: 150px;">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
         </div>
     </div>
     <div class="error" id="error">
@@ -118,13 +145,6 @@
 
         function calculateResult() {
             showError();
-        }
-
-        function getRandomPosition() {
-            const top = Math.random() * 100;
-            const left = Math.random() * 100;
-            const rotate = Math.random() * 360;
-            return { top, left, rotate };
         }
 
         function showError() {
@@ -145,13 +165,10 @@
                 }
                 const p = document.createElement('p');
                 p.innerHTML = errorLines[i];
-                const { top, left, rotate } = getRandomPosition();
-                p.style.top = top + 'vh';
-                p.style.left = left + 'vw';
-                p.style.transform = 'rotate(' + rotate + 'deg)';
+                p.style.animationDelay = `${Math.random()}s`;
                 errorTextDiv.appendChild(p);
                 i++;
-            }, 30);
+            }, 10);
         }
     </script>
 </body>
