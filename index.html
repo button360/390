@@ -33,6 +33,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             display: none; /* Initially hidden */
+            animation: fadeIn 0.5s ease forwards; /* Animation for fade-in */
         }
         .error-box p {
             color: #333; /* Dark text color */
@@ -47,22 +48,34 @@
         .error-box:nth-child(1) {
             top: 20px; /* Adjust as needed */
             left: 20px; /* Adjust as needed */
-            width: 250px; /* Adjust as needed */
+            width: 300px; /* Adjust as needed */
         }
         .error-box:nth-child(2) {
             top: 20px; /* Adjust as needed */
             right: 20px; /* Adjust as needed */
-            width: 250px; /* Adjust as needed */
+            width: 300px; /* Adjust as needed */
         }
         .error-box:nth-child(3) {
             bottom: 20px; /* Adjust as needed */
             left: 20px; /* Adjust as needed */
-            width: 250px; /* Adjust as needed */
+            width: 300px; /* Adjust as needed */
         }
         .error-box:nth-child(4) {
             bottom: 20px; /* Adjust as needed */
             right: 20px; /* Adjust as needed */
-            width: 250px; /* Adjust as needed */
+            width: 300px; /* Adjust as needed */
+        }
+
+        /* Keyframes for fadeIn animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8); /* Initial scale */
+            }
+            to {
+                opacity: 1;
+                transform: scale(1); /* Final scale */
+            }
         }
     </style>
 </head>
@@ -110,9 +123,13 @@
     <script>
         function calculate() {
             // Complex calculation logic would go here
-            // For demonstration, let's show all error boxes simultaneously
+            // For demonstration, let's show all error boxes with a delay
+            var delay = 0;
             document.querySelectorAll('.error-box').forEach(function(box) {
-                box.classList.add('active');
+                setTimeout(function() {
+                    box.classList.add('active');
+                }, delay);
+                delay += 200; // Adjust delay as needed (in milliseconds)
             });
             document.getElementById('result').innerText = 'Result: 42';
         }
