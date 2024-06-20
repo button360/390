@@ -3,162 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Mode Calculator</title>
+    <title>Complex Calculator</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #121212;
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            color: #ffffff;
         }
         .calculator {
-            background: #1e1e1e;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            background-color: #fff;
+            border: 2px solid #ccc;
             padding: 20px;
-            width: 320px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .calculator input {
-            width: calc(100% - 20px);
-            height: 50px;
-            margin: 10px 0;
-            padding: 10px;
-            font-size: 1.5em;
-            text-align: right;
-            border: none;
-            border-radius: 6px;
-            background-color: #333333;
-            color: #ffffff;
-        }
-        .calculator button {
-            width: 70px;
-            height: 70px;
-            margin: 5px;
-            font-size: 1.2em;
-            border: none;
             border-radius: 8px;
-            background-color: #333333;
-            color: #ffffff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .calculator button:active {
-            background-color: #555555;
-        }
-        .operator {
-            background-color: #ff9500;
-        }
-        .operator:active {
-            background-color: #e08300;
-        }
-        .equals {
-            background-color: #4caf50;
-        }
-        .equals:active {
-            background-color: #45a049;
-        }
-        .clear {
-            background-color: #ff3b30;
-        }
-        .clear:active {
-            background-color: #e02920;
-        }
-        .error {
-            position: absolute;
-            top: 0;
-            left: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 400px;
             width: 100%;
-            height: 100%;
-            background-color: rgba(18, 18, 18, 0.95);
-            color: red;
-            font-size: 0.8em;
-            overflow: hidden;
-            z-index: 1000;
-            display: none;
-            box-sizing: border-box;
-            padding: 20px;
+            text-align: center;
         }
-        .error p {
-            margin: 10px 0;
-            white-space: normal;
-            animation: errorAnimation 5s linear infinite;
-        }
-        @keyframes errorAnimation {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            100% {
-                transform: translate(calc(100vw + 100%), calc(100vh + 100%)) rotate(720deg);
-            }
+        .error-codes {
+            font-size: 10px;
+            color: #999;
+            margin-top: 10px;
+            text-align: left;
         }
     </style>
 </head>
 <body>
     <div class="calculator">
-        <input type="text" id="display" disabled>
-        <div>
-            <button class="clear" onclick="clearDisplay()">Clear</button>
-            <button class="operator" onclick="appendToDisplay('/')">Divide by Zero</button>
-            <button class="operator" onclick="appendToDisplay('*')">Multiplication Overflow</button>
-            <button class="operator" onclick="appendToDisplay('-')">Subtraction Underflow</button>
-        </div>
-        <div>
-            <button onclick="appendToDisplay('7')">SyntaxError: Unexpected token '</button>
-            <button onclick="appendToDisplay('8')">TypeError: Cannot read property 'toString' of null</button>
-            <button onclick="appendToDisplay('9')">ReferenceError: variableName is not defined</button>
-            <button class="operator" onclick="appendToDisplay('+')">Uncaught Error: Stack Overflow</button>
-        </div>
-        <div>
-            <button onclick="appendToDisplay('4')">Unresolved Promise: Rejected</button>
-            <button onclick="appendToDisplay('5')">TypeError: method.call is not a function</button>
-            <button onclick="appendToDisplay('6')">OutOfMemoryError: Memory allocation failed</button>
-            <button class="equals" onclick="calculateResult()">Infinity</button>
-        </div>
-        <div>
-            <button onclick="appendToDisplay('1')">Cannot read property 'map' of undefined</button>
-            <button onclick="appendToDisplay('2')">Error: The server responded with a status of 404 (Not Found)</button>
-            <button onclick="appendToDisplay('3')">Uncaught RangeError: Maximum call stack size exceeded</button>
-        </div>
-        <div>
-            <button onclick="appendToDisplay('0')" style="width: 150px;">Error: Unhandled rejection in promise chain</button>
-            <button onclick="appendToDisplay('.')">TypeError: function is not defined</button>
+        <h2>Complex Calculator</h2>
+        <input type="text" id="inputField" placeholder="Enter calculation...">
+        <button onclick="calculate()">=</button>
+        <div id="result" style="margin-top: 10px;"></div>
+        <div class="error-codes">
+            <p>[ERROR] Unable to parse expression. Check syntax.</p>
+            <p>[WARNING] Floating-point precision exceeded. Rounding applied.</p>
+            <p>[INFO] Stack overflow detected in calculation routine.</p>
+            <p>[DEBUG] Variable 'x' undefined. Assuming default value.</p>
         </div>
     </div>
-    <div class="error" id="error">
-        <p>Exception in thread "main" java.lang.NullPointerException at com.example.Main.main(Main.java:10)</p>
-        <p>java.lang.OutOfMemoryError: GC overhead limit exceeded</p>
-        <p>RuntimeException: Unable to start activity ComponentInfo{com.example.app/com.example.Activity}: java.lang.NullPointerException</p>
-        <p>Microsoft .NET Framework Unhandled Exception: System.NullReferenceException: Object reference not set to an instance of an object.</p>
-        <p>TypeError: Cannot read property 'then' of undefined</p>
-        <p>AttributeError: 'module' object has no attribute 'function'</p>
-        <p>ValueError: invalid literal for int() with base 10: 'abc'</p>
-        <p>AssertionError: assert expression</p>
-        <p>Uncaught SyntaxError: Unexpected end of JSON input</p>
-        <p>UnknownError: An unknown error occurred</p>
-    </div>
+
     <script>
-        function appendToDisplay(value) {
-            document.getElementById('display').value += value;
-        }
-
-        function clearDisplay() {
-            document.getElementById('display').value = '';
-        }
-
-        function calculateResult() {
-            showError();
-        }
-
-        function showError() {
-            const errorDiv = document.getElementById('error');
-            errorDiv.style.display = 'block';
+        function calculate() {
+            // Complex calculation logic would go here
+            document.getElementById('result').innerText = 'Result: 42';
         }
     </script>
 </body>
