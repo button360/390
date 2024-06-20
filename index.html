@@ -23,6 +23,7 @@
             width: 320px;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
         .calculator input {
             width: calc(100% - 20px);
@@ -70,7 +71,7 @@
             background-color: #e02920;
         }
         .error {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -81,21 +82,20 @@
             overflow: hidden;
             z-index: 1000;
             display: none;
-            padding: 20px;
             box-sizing: border-box;
+            padding: 20px;
         }
         .error p {
-            margin: 0;
-            white-space: nowrap;
-            position: absolute;
-            animation: scrollDown 3s linear infinite;
+            margin: 10px 0;
+            white-space: normal;
+            animation: errorAnimation 5s linear infinite;
         }
-        @keyframes scrollDown {
+        @keyframes errorAnimation {
             0% {
-                top: -100%;
+                transform: translate(-50%, -50%) rotate(0deg);
             }
             100% {
-                top: 100%;
+                transform: translate(calc(100vw + 100%), calc(100vh + 100%)) rotate(720deg);
             }
         }
     </style>
@@ -104,35 +104,44 @@
     <div class="calculator">
         <input type="text" id="display" disabled>
         <div>
-            <button class="clear" onclick="clearDisplay()">C</button>
-            <button class="operator" onclick="appendToDisplay('/')">/</button>
-            <button class="operator" onclick="appendToDisplay('*')">x</button>
-            <button class="operator" onclick="appendToDisplay('-')">-</button>
+            <button class="clear" onclick="clearDisplay()">Clear</button>
+            <button class="operator" onclick="appendToDisplay('/')">Divide by Zero</button>
+            <button class="operator" onclick="appendToDisplay('*')">Multiplication Overflow</button>
+            <button class="operator" onclick="appendToDisplay('-')">Subtraction Underflow</button>
         </div>
         <div>
-            <button onclick="appendToDisplay('7')">7</button>
-            <button onclick="appendToDisplay('8')">8</button>
-            <button onclick="appendToDisplay('9')">9</button>
-            <button class="operator" onclick="appendToDisplay('+')">+</button>
+            <button onclick="appendToDisplay('7')">SyntaxError: Unexpected token '</button>
+            <button onclick="appendToDisplay('8')">TypeError: Cannot read property 'toString' of null</button>
+            <button onclick="appendToDisplay('9')">ReferenceError: variableName is not defined</button>
+            <button class="operator" onclick="appendToDisplay('+')">Uncaught Error: Stack Overflow</button>
         </div>
         <div>
-            <button onclick="appendToDisplay('4')">4</button>
-            <button onclick="appendToDisplay('5')">5</button>
-            <button onclick="appendToDisplay('6')">6</button>
-            <button class="equals" onclick="calculateResult()">=</button>
+            <button onclick="appendToDisplay('4')">Unresolved Promise: Rejected</button>
+            <button onclick="appendToDisplay('5')">TypeError: method.call is not a function</button>
+            <button onclick="appendToDisplay('6')">OutOfMemoryError: Memory allocation failed</button>
+            <button class="equals" onclick="calculateResult()">Infinity</button>
         </div>
         <div>
-            <button onclick="appendToDisplay('1')">1</button>
-            <button onclick="appendToDisplay('2')">2</button>
-            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('1')">Cannot read property 'map' of undefined</button>
+            <button onclick="appendToDisplay('2')">Error: The server responded with a status of 404 (Not Found)</button>
+            <button onclick="appendToDisplay('3')">Uncaught RangeError: Maximum call stack size exceeded</button>
         </div>
         <div>
-            <button onclick="appendToDisplay('0')" style="width: 150px;">0</button>
-            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="appendToDisplay('0')" style="width: 150px;">Error: Unhandled rejection in promise chain</button>
+            <button onclick="appendToDisplay('.')">TypeError: function is not defined</button>
         </div>
     </div>
     <div class="error" id="error">
-        <div id="errorText"></div>
+        <p>Exception in thread "main" java.lang.NullPointerException at com.example.Main.main(Main.java:10)</p>
+        <p>java.lang.OutOfMemoryError: GC overhead limit exceeded</p>
+        <p>RuntimeException: Unable to start activity ComponentInfo{com.example.app/com.example.Activity}: java.lang.NullPointerException</p>
+        <p>Microsoft .NET Framework Unhandled Exception: System.NullReferenceException: Object reference not set to an instance of an object.</p>
+        <p>TypeError: Cannot read property 'then' of undefined</p>
+        <p>AttributeError: 'module' object has no attribute 'function'</p>
+        <p>ValueError: invalid literal for int() with base 10: 'abc'</p>
+        <p>AssertionError: assert expression</p>
+        <p>Uncaught SyntaxError: Unexpected end of JSON input</p>
+        <p>UnknownError: An unknown error occurred</p>
     </div>
     <script>
         function appendToDisplay(value) {
@@ -149,26 +158,7 @@
 
         function showError() {
             const errorDiv = document.getElementById('error');
-            const errorTextDiv = document.getElementById('errorText');
-            errorTextDiv.innerHTML = '';
             errorDiv.style.display = 'block';
-            let errorContent = '';
-            for (let i = 0; i < 100; i++) {
-                errorContent += 'ERROR CODE 0x' + Math.floor(Math.random() * 10000).toString(16).toUpperCase() + '<br>';
-            }
-            const errorLines = errorContent.split('<br>');
-            let i = 0;
-            const interval = setInterval(() => {
-                if (i >= errorLines.length) {
-                    clearInterval(interval);
-                    return;
-                }
-                const p = document.createElement('p');
-                p.innerHTML = errorLines[i];
-                p.style.animationDelay = `${Math.random()}s`;
-                errorTextDiv.appendChild(p);
-                i++;
-            }, 10);
         }
     </script>
 </body>
