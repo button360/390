@@ -55,7 +55,7 @@
             background-color: #e08300;
         }
         .error {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -72,6 +72,7 @@
         .error p {
             margin: 0;
             white-space: nowrap;
+            position: absolute;
         }
     </style>
 </head>
@@ -119,6 +120,13 @@
             showError();
         }
 
+        function getRandomPosition() {
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            const rotate = Math.random() * 360;
+            return { top, left, rotate };
+        }
+
         function showError() {
             const errorDiv = document.getElementById('error');
             const errorTextDiv = document.getElementById('errorText');
@@ -137,6 +145,10 @@
                 }
                 const p = document.createElement('p');
                 p.innerHTML = errorLines[i];
+                const { top, left, rotate } = getRandomPosition();
+                p.style.top = top + 'vh';
+                p.style.left = left + 'vw';
+                p.style.transform = 'rotate(' + rotate + 'deg)';
                 errorTextDiv.appendChild(p);
                 i++;
             }, 30);
