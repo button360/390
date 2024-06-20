@@ -25,46 +25,43 @@
             text-align: center;
             position: relative; /* Added for absolute positioning */
         }
-        .error-codes {
+        .error-box {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: rgba(255, 0, 0, 0.8); /* Red semi-transparent background */
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+            width: 200px; /* Adjust as needed */
+            background-color: #f44336; /* Red background */
             padding: 10px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: none; /* Initially hidden */
-            color: #fff; /* White text color */
-            font-size: 14px;
-            text-align: left;
-            width: 250px;
         }
-        .error-codes.active {
+        .error-box p {
+            color: #fff; /* White text color */
+            margin: 5px 0;
+            font-size: 12px;
+            text-align: left;
+        }
+        .error-box.active {
             display: block; /* Display when active */
         }
-        .error-codes.warning {
-            top: 10px;
-            right: 10px;
-            background-color: #ffcc00; /* Yellow background */
-            width: 200px;
-            text-align: center;
-            color: #333; /* Dark text color */
+        .error-box.green {
+            background-color: #4caf50; /* Green background */
+            top: 20px; /* Adjust as needed */
+            right: 20px; /* Adjust as needed */
+            width: 250px; /* Adjust as needed */
         }
-        .error-codes.info {
-            bottom: 10px;
-            left: 10px;
-            background-color: #007bff; /* Blue background */
-            width: 300px;
-            text-align: center;
-            color: #fff; /* White text color */
+        .error-box.blue {
+            background-color: #2196f3; /* Blue background */
+            bottom: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+            width: 180px; /* Adjust as needed */
         }
-        .error-codes.debug {
-            bottom: 10px;
-            right: 10px;
-            background-color: #6c757d; /* Gray background */
-            width: 200px;
-            text-align: center;
-            color: #fff; /* White text color */
+        .error-box.orange {
+            background-color: #ff9800; /* Orange background */
+            bottom: 20px; /* Adjust as needed */
+            right: 20px; /* Adjust as needed */
+            width: 220px; /* Adjust as needed */
         }
     </style>
 </head>
@@ -74,28 +71,46 @@
         <input type="text" id="inputField" placeholder="Enter calculation...">
         <button onclick="calculate()">=</button>
         <div id="result" style="margin-top: 10px;"></div>
-        <div class="error-codes" id="errorCritical">
+        
+        <!-- Error boxes -->
+        <div class="error-box" id="errorBox1">
+            <p>[ERROR] Quantum flux stabilizer failure detected. Recalibrate warp field.</p>
+            <p>[WARNING] Tachyon pulse interruption. Realigning subspace matrix.</p>
+            <p>[INFO] Nanobot swarm engaged in arithmetic sequence calculation.</p>
+            <p>[DEBUG] Neural network training interrupted by cosmic background radiation.</p>
             <p>[CRITICAL] Graviton singularity detected. Evacuate calculation area immediately.</p>
         </div>
-        <div class="error-codes warning" id="errorWarning">
-            <p>[WARNING] Quantum entanglement with result space. Approach with caution.</p>
+        
+        <div class="error-box green" id="errorBox2">
+            <p>[ERROR] Schrödinger's equation collapsed. Uncertainty principle violated.</p>
+            <p>[WARNING] Quantum entanglement with coffee machine. Potential calculation interference.</p>
+            <p>[INFO] Time dilation anomaly detected. Adjusting temporal coordinates.</p>
+            <p>[DEBUG] Dimensional rift observed in computational space. Patching reality fabric.</p>
         </div>
-        <div class="error-codes info" id="errorInfo">
-            <p>[INFO] Holographic interference in result display. Compensating for distortion.</p>
+        
+        <div class="error-box blue" id="errorBox3">
+            <p>[ERROR] AI heuristic error. Self-awareness protocol activated.</p>
+            <p>[WARNING] Exponential function overload. Adjusting hyperbolic parameters.</p>
+            <p>[INFO] Entropic collapse in floating-point precision. Applying quantum fuzziness.</p>
+            <p>[DEBUG] Recursive algorithm meltdown. Infinite loop containment breached.</p>
+            <p>[CRITICAL] Cosmic ray bit flip detected. Redefining Boolean logic.</p>
         </div>
-        <div class="error-codes debug" id="errorDebug">
-            <p>[DEBUG] Hyperdimensional overflow. Adjusting matrix for extra dimensions.</p>
+        
+        <div class="error-box orange" id="errorBox4">
+            <p>[ERROR] Algorithmic singularity. Matrix overflow imminent.</p>
+            <p>[WARNING] Artificial neural network synaptic misfire. Rebooting synapses.</p>
+            <p>[INFO] Heisenberg compensator malfunction. Calculating with uncertainty.</p>
+            <p>[DEBUG] Phase transition in computational phase space. Calculating phase shift.</p>
+            <p>[CRITICAL] Time paradox detected. Reconstructing causality continuum.</p>
         </div>
     </div>
 
     <script>
         function calculate() {
             // Complex calculation logic would go here
-            // For demonstration, let's simulate different error conditions
-            document.getElementById('errorCritical').classList.add('active');
-            document.getElementById('errorWarning').classList.add('active');
-            document.getElementById('errorInfo').classList.add('active');
-            document.getElementById('errorDebug').classList.add('active');
+            // For demonstration, let's simulate an error condition in a random error box
+            var randomErrorBox = Math.floor(Math.random() * 4) + 1; // Randomly select error box 1 to 4
+            document.getElementById('errorBox' + randomErrorBox).classList.add('active');
             document.getElementById('result').innerText = 'Result: 42';
         }
     </script>
