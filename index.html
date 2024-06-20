@@ -27,41 +27,42 @@
         }
         .error-box {
             position: absolute;
-            top: 20px; /* Adjust as needed */
-            left: 20px; /* Adjust as needed */
-            width: 200px; /* Adjust as needed */
-            background-color: #f44336; /* Red background */
-            padding: 10px;
+            background-color: #fff; /* White background */
+            padding: 15px;
+            border: 2px solid #e74c3c; /* Red border */
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             display: none; /* Initially hidden */
         }
         .error-box p {
-            color: #fff; /* White text color */
-            margin: 5px 0;
-            font-size: 12px;
+            color: #333; /* Dark text color */
+            margin: 10px 0;
+            font-size: 14px;
             text-align: left;
         }
         .error-box.active {
             display: block; /* Display when active */
         }
-        .error-box.green {
-            background-color: #4caf50; /* Green background */
+        /* Positioning of error boxes */
+        .error-box:nth-child(1) {
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+            width: 250px; /* Adjust as needed */
+        }
+        .error-box:nth-child(2) {
             top: 20px; /* Adjust as needed */
             right: 20px; /* Adjust as needed */
             width: 250px; /* Adjust as needed */
         }
-        .error-box.blue {
-            background-color: #2196f3; /* Blue background */
+        .error-box:nth-child(3) {
             bottom: 20px; /* Adjust as needed */
             left: 20px; /* Adjust as needed */
-            width: 180px; /* Adjust as needed */
+            width: 250px; /* Adjust as needed */
         }
-        .error-box.orange {
-            background-color: #ff9800; /* Orange background */
+        .error-box:nth-child(4) {
             bottom: 20px; /* Adjust as needed */
             right: 20px; /* Adjust as needed */
-            width: 220px; /* Adjust as needed */
+            width: 250px; /* Adjust as needed */
         }
     </style>
 </head>
@@ -81,36 +82,38 @@
             <p>[CRITICAL] Graviton singularity detected. Evacuate calculation area immediately.</p>
         </div>
         
-        <div class="error-box green" id="errorBox2">
+        <div class="error-box" id="errorBox2">
             <p>[ERROR] Schrödinger's equation collapsed. Uncertainty principle violated.</p>
             <p>[WARNING] Quantum entanglement with coffee machine. Potential calculation interference.</p>
             <p>[INFO] Time dilation anomaly detected. Adjusting temporal coordinates.</p>
             <p>[DEBUG] Dimensional rift observed in computational space. Patching reality fabric.</p>
+            <p>[CRITICAL] Cosmic ray bit flip detected. Redefining Boolean logic.</p>
         </div>
         
-        <div class="error-box blue" id="errorBox3">
+        <div class="error-box" id="errorBox3">
             <p>[ERROR] AI heuristic error. Self-awareness protocol activated.</p>
             <p>[WARNING] Exponential function overload. Adjusting hyperbolic parameters.</p>
             <p>[INFO] Entropic collapse in floating-point precision. Applying quantum fuzziness.</p>
             <p>[DEBUG] Recursive algorithm meltdown. Infinite loop containment breached.</p>
-            <p>[CRITICAL] Cosmic ray bit flip detected. Redefining Boolean logic.</p>
+            <p>[CRITICAL] Time paradox detected. Reconstructing causality continuum.</p>
         </div>
         
-        <div class="error-box orange" id="errorBox4">
+        <div class="error-box" id="errorBox4">
             <p>[ERROR] Algorithmic singularity. Matrix overflow imminent.</p>
             <p>[WARNING] Artificial neural network synaptic misfire. Rebooting synapses.</p>
             <p>[INFO] Heisenberg compensator malfunction. Calculating with uncertainty.</p>
             <p>[DEBUG] Phase transition in computational phase space. Calculating phase shift.</p>
-            <p>[CRITICAL] Time paradox detected. Reconstructing causality continuum.</p>
+            <p>[CRITICAL] Quantum anomaly detected. Shifting quantum state.</p>
         </div>
     </div>
 
     <script>
         function calculate() {
             // Complex calculation logic would go here
-            // For demonstration, let's simulate an error condition in a random error box
-            var randomErrorBox = Math.floor(Math.random() * 4) + 1; // Randomly select error box 1 to 4
-            document.getElementById('errorBox' + randomErrorBox).classList.add('active');
+            // For demonstration, let's show all error boxes simultaneously
+            document.querySelectorAll('.error-box').forEach(function(box) {
+                box.classList.add('active');
+            });
             document.getElementById('result').innerText = 'Result: 42';
         }
     </script>
