@@ -23,12 +23,27 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
+            position: relative; /* Added for absolute positioning */
         }
         .error-codes {
-            font-size: 10px;
-            color: #999;
-            margin-top: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffa500; /* Bright orange background */
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: none; /* Initially hidden */
+        }
+        .error-codes p {
+            color: #fff; /* White text color */
+            margin: 5px 0;
+            font-size: 12px;
             text-align: left;
+        }
+        .error-codes.active {
+            display: block; /* Display when active */
         }
     </style>
 </head>
@@ -38,8 +53,8 @@
         <input type="text" id="inputField" placeholder="Enter calculation...">
         <button onclick="calculate()">=</button>
         <div id="result" style="margin-top: 10px;"></div>
-        <div class="error-codes">
-            <p>[ERROR] Unable to parse expression. Check syntax.</p>
+        <div class="error-codes" id="errorCodes">
+            <p>[ERROR] Cannot parse expression. Syntax error detected.</p>
             <p>[WARNING] Floating-point precision exceeded. Rounding applied.</p>
             <p>[INFO] Stack overflow detected in calculation routine.</p>
             <p>[DEBUG] Variable 'x' undefined. Assuming default value.</p>
@@ -49,6 +64,8 @@
     <script>
         function calculate() {
             // Complex calculation logic would go here
+            // For demonstration, let's simulate an error condition
+            document.getElementById('errorCodes').classList.add('active');
             document.getElementById('result').innerText = 'Result: 42';
         }
     </script>
